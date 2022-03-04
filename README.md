@@ -62,3 +62,8 @@ class YourModelAnonymizer(Anonymizer):
     
     email = Faker("email", unique=True)
 ```
+
+## Inspired by
+
+- https://github.com/Tesorio/django-anon
+- https://github.com/FactoryBoy/factory_boy
