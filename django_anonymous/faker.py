@@ -1,5 +1,5 @@
-from django.utils.translation import get_language
 import faker
+from django.utils.translation import get_language
 
 
 class Faker:

@@ -1,5 +1,3 @@
-
-
 class Anonymizer:
     SELECT_CHUNK_SIZE = 500
     UPDATE_BATCH_SIZE = 100

@@ -1,5 +1,6 @@
 from django.core.management.base import BaseCommand
-from django_anonymous.register import registered_models, load_anonymizer
+
+from django_anonymous.register import load_anonymizer, registered_models
 
 
 class Command(BaseCommand):
@@ -17,4 +18,6 @@ class Command(BaseCommand):
                 model_name = model_anonymizer._model._meta.verbose_name.title()
             else:
                 model_name = model_anonymizer._model._meta.verbose_name_plural.title()
-            self.stdout.write(self.style.SUCCESS(f"{total} {model_name} are anonymized"))
+            self.stdout.write(
+                self.style.SUCCESS(f"{total} {model_name} are anonymized")
+            )

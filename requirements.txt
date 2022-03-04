@@ -1,0 +1,8 @@
+django~=3.2.12
+faker
+black
+isort
+flake8
+pytest
+pytest-django
+pytest-cov

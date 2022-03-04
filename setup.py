@@ -1,11 +1,12 @@
 import os
+
 from setuptools import Command, find_packages, setup
 
 from django_anonymous import __version__
 
 
 def readme():
-    with open('README.md') as f:
+    with open("README.md") as f:
         return f.read()
 
 
@@ -43,18 +44,18 @@ setup(
     name="django-anonymous",
     version=__version__,
     packages=find_packages(include=["django_anonymous", "django_anonymous.*"]),
-    python_requires='>=3.6',
+    python_requires=">=3.6",
     install_requires=["Faker"],
     cmdclass={"publish": PublishCommand, "tag": CreateTagCommand},
     # metadata for upload to PyPI
-    description="Simple Djanngo module to anonymize production data for safe usage on none production environments",
+    description="Simple Djanngo module to anonymize production data for safe usage on none production environments",  # noqa E501
     long_description=readme(),
     long_description_content_type="text/markdown",
-    keywords=['Django', 'anonymous', 'anonymize'],
+    keywords=["Django", "anonymous", "anonymize"],
     author="Maikel Martens",
-    author_email='maikel@martens.me',
+    author_email="maikel@martens.me",
     url="https://github.com/krukas/django-anonymous",
-    download_url=f'https://github.com/krukas/django-anonymous/releases/tag/{__version__}',
+    download_url=f"https://github.com/krukas/django-anonymous/releases/tag/{__version__}",  # noqa E501
     license="GPL3",
     platforms=["any"],
     classifiers=[

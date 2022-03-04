@@ -1,4 +1,10 @@
-# django-anonymous
+# django-anonymous 
+
+[![CI](https://github.com/krukas/django-anonymous/actions/workflows/main.yml/badge.svg)](https://github.com/krukas/django-anonymous/actions/workflows/main.yml)
+[![codecov](https://codecov.io/gh/krukas/django-anonymous/branch/master/graph/badge.svg?token=BPQQ1RVKDJ)](https://codecov.io/gh/krukas/django-anonymous)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![PyPI version](https://badge.fury.io/py/django-anonymous.svg)](https://badge.fury.io/py/django-anonymous)
+
 
 Simple Djanngo module to anonymize production data for safe usage on none production environments.
 

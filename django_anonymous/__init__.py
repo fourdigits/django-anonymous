@@ -1,6 +1,6 @@
-from .faker import Faker
 from .anonymizer import Anonymizer
-from. register import register
+from .faker import Faker
+from .register import register
 
 __all__ = [
     "Faker",
