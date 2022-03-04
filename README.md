@@ -6,7 +6,7 @@
 [![PyPI version](https://badge.fury.io/py/django-anonymous.svg)](https://badge.fury.io/py/django-anonymous)
 
 
-Simple Djanngo module to anonymize production data for safe usage on none production environments.
+Simple Djanngo module to anonymize production data for safe usage on non-production environments.
 
 ## Installation
 
