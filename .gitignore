@@ -1,0 +1,9 @@
+__pycache__/
+env/
+*.py[cod]
+.idea/
+.python-version
+*.sqlite3
+build/
+dist/
+*.egg-info
