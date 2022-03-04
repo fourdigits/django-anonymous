@@ -53,9 +53,9 @@ setup(
     long_description_content_type="text/markdown",
     keywords=["Django", "anonymous", "anonymize"],
     author="Maikel Martens",
-    author_email="maikel@martens.me",
-    url="https://github.com/krukas/django-anonymous",
-    download_url=f"https://github.com/krukas/django-anonymous/releases/tag/{__version__}",  # noqa E501
+    author_email="maikel@fourdigits.nl",
+    url="https://github.com/fourdigits/django-anonymous",
+    download_url=f"https://github.com/fourdigits/django-anonymous/releases/tag/{__version__}",  # noqa E501
     license="GPL3",
     platforms=["any"],
     classifiers=[
