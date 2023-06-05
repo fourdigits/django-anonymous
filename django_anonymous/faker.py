@@ -14,13 +14,15 @@ class Faker:
         self.unique = kwargs.pop("unique", False)
         self.kwargs = kwargs
 
-    def __call__(self):
+    def __call__(self, obj, seed=None):
         local_faker = self._get_faker()
+        if seed:
+            local_faker.seed_instance(seed)
         if self.unique:
             local_faker = local_faker.unique
         return local_faker.format(self.provider, **self.kwargs)
 
-    def _get_faker(self):
+    def _get_faker(self) -> faker.Faker:
         if self.locale not in self._FAKER_REGISTRY:
             self._FAKER_REGISTRY[self.locale] = faker.Faker(locale=self.locale)
         return self._FAKER_REGISTRY[self.locale]

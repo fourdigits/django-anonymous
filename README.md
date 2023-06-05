@@ -52,6 +52,24 @@ class YourModelAnonymizer(Anonymizer):
         return super().get_queryset().filter(is_staff=True)
 ```
 
+## Faker seed
+
+Default it will use the object id as seed, to generate the same data for every run.
+You can disable this by overriding the `get_object_seed` and return falsy value.
+
+```python
+from django_anonymous import Anonymizer, Faker, register
+from .model import YourModel
+
+
+@register(YourModel)
+class YourModelAnonymizer(Anonymizer):
+    email = Faker("email", unique=True)
+
+    def get_object_seed(self, obj):
+        return None
+```
+
 ## Settings for Anonymizer
 
 Per Anonymizer you can set the select chunk size and update batch size.
