@@ -1,5 +1,6 @@
 django~=3.2.12
-faker
+Faker
+tqdm
 black
 isort
 flake8

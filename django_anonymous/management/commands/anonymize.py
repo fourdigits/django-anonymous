@@ -1,4 +1,5 @@
 from django.core.management.base import BaseCommand
+from tqdm import tqdm
 
 from django_anonymous.register import load_anonymizer, registered_models
 
@@ -20,11 +21,13 @@ class Command(BaseCommand):
 
         load_anonymizer()
         for model_anonymizer in registered_models.values():
-            total = model_anonymizer.run_anonymizer()
-            if total == 1:
-                model_name = model_anonymizer._model._meta.verbose_name.title()
+            model_name = model_anonymizer._model._meta.verbose_name_plural.title()
+            object_count = model_anonymizer.get_total()
+            if object_count:
+                with tqdm(desc=f"Anonymizing {model_name}", total=object_count) as pbar:
+                    for processed in model_anonymizer.run_anonymizer():
+                        pbar.update(processed)
             else:
-                model_name = model_anonymizer._model._meta.verbose_name_plural.title()
-            self.stdout.write(
-                self.style.SUCCESS(f"{total} {model_name} are anonymized")
-            )
+                self.stdout.write(
+                    f"Skipping {model_name}, no objects found to anonymize"
+                )

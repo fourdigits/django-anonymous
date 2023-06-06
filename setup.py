@@ -45,7 +45,7 @@ setup(
     version=__version__,
     packages=find_packages(include=["django_anonymous", "django_anonymous.*"]),
     python_requires=">=3.6",
-    install_requires=["Faker"],
+    install_requires=["Faker", "tqdm"],
     cmdclass={"publish": PublishCommand, "tag": CreateTagCommand},
     # metadata for upload to PyPI
     description="Simple Djanngo module to anonymize production data for safe usage on none production environments",  # noqa E501

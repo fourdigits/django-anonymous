@@ -6,15 +6,16 @@ class Anonymizer:
         self._fields = self._get_fields()
         self._model = model
 
+    def get_total(self):
+        return self.get_queryset().count()
+
     def run_anonymizer(self):
-        total = 0
         for batch in self.get_batches():
-            total += len(batch)
             self._model.objects.bulk_update(
                 [self.anonymize_object(obj) for obj in batch],
                 fields=self._fields,
             )
-        return total
+            yield len(batch)
 
     def _get_fields(self):
         reserved_names = list(Anonymizer.__dict__.keys())
