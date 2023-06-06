@@ -1,6 +1,8 @@
 import pytest
 from django.core.management import call_command
 
+from django_anonymous.anonymizer import Anonymizer
+from django_anonymous.faker import Faker
 from django_anonymous.register import load_anonymizer, register, registered_models
 from test_project.anon import ItemAnonymizer
 from test_project.models import Item, Order
@@ -73,3 +75,26 @@ def test_anonymizer_seed():
     item.id = item.id + 1
     anon.anonymize_object(item)
     assert item.description != seed_description
+
+
+@pytest.mark.django_db
+def test_anonymizer_emtpy_field():
+    order = Order.objects.create(first_name="Master", last_name="")
+
+    class OrderAnonymizer(Anonymizer):
+        ANONYMIZE_EMPTY_FIELD = False
+        last_name = Faker("last_name")
+
+    anon = OrderAnonymizer(Order)
+    list(anon.run_anonymizer())
+    order.refresh_from_db()
+    assert order.last_name == ""
+
+    class OrderAnonymizer(Anonymizer):
+        ANONYMIZE_EMPTY_FIELD = True
+        last_name = Faker("last_name")
+
+    anon = OrderAnonymizer(Order)
+    list(anon.run_anonymizer())
+    order.refresh_from_db()
+    assert order.last_name != ""

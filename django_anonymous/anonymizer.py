@@ -1,6 +1,7 @@
 class Anonymizer:
     SELECT_CHUNK_SIZE = 500
     UPDATE_BATCH_SIZE = 100
+    ANONYMIZE_EMPTY_FIELD = False
 
     def __init__(self, model):
         self._fields = self._get_fields()
@@ -43,6 +44,9 @@ class Anonymizer:
 
     def anonymize_object(self, obj):
         for field, value in self._fields.items():
+            if not self.ANONYMIZE_EMPTY_FIELD and not getattr(obj, field):
+                continue
+
             if callable(value):
                 new_value = value(obj, self.get_object_seed(obj))
             else:
