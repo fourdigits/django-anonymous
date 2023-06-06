@@ -73,6 +73,7 @@ class YourModelAnonymizer(Anonymizer):
 ## Settings for Anonymizer
 
 Per Anonymizer you can set the select chunk size and update batch size.
+Default it will not anonymize a field that has no value.
 
 ```python
 from django_anonymous import Anonymizer, Faker, register
@@ -83,6 +84,7 @@ from .model import YourModel
 class YourModelAnonymizer(Anonymizer):
     SELECT_CHUNK_SIZE = 100
     UPDATE_BATCH_SIZE = 25
+    ANONYMIZE_EMPTY_FIELD = False
     
     email = Faker("email", unique=True)
 ```
