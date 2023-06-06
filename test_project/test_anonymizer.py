@@ -2,6 +2,7 @@ import pytest
 from django.core.management import call_command
 
 from django_anonymous.register import load_anonymizer, register, registered_models
+from test_project.anon import ItemAnonymizer
 from test_project.models import Item, Order
 
 
@@ -48,3 +49,27 @@ def test_anonymizer():
     assert item.order_id == new_item.order_id
     assert item.description != new_item.description
     assert 25 == new_item.amount
+
+
+@pytest.mark.django_db
+def test_anonymizer_seed():
+    item = Item.objects.create(
+        order=Order.objects.create(first_name="Master", last_name="Chief"),
+        description="test",
+        amount=12.50,
+    )
+    anon = ItemAnonymizer(Item)
+
+    anon.anonymize_object(item)
+    assert item.description != "test"
+
+    # Should generate same description
+    seed_description = item.description
+    item.description = "test"
+    anon.anonymize_object(item)
+    assert item.description == seed_description
+
+    # Should generate different description
+    item.id = item.id + 1
+    anon.anonymize_object(item)
+    assert item.description != seed_description

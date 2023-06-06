@@ -38,10 +38,13 @@ class Anonymizer:
         if batch:
             yield batch
 
+    def get_object_seed(self, obj):
+        return obj.id
+
     def anonymize_object(self, obj):
         for field, value in self._fields.items():
             if callable(value):
-                new_value = value()
+                new_value = value(obj, self.get_object_seed(obj))
             else:
                 new_value = value
 
