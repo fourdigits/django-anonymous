@@ -9,8 +9,15 @@ class Command(BaseCommand):
     """
 
     help = __doc__
+    confirmation_text = "Are you sure you want to anonymize all data? [Y/n]: "
+
+    def add_arguments(self, parser):
+        parser.add_argument("--yes", action="store_true")
 
     def handle(self, *args, **options):
+        if not options.get("yes") and input(self.confirmation_text).lower() == "n":
+            exit(0)
+
         load_anonymizer()
         for model_anonymizer in registered_models.values():
             total = model_anonymizer.run_anonymizer()

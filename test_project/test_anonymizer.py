@@ -37,7 +37,7 @@ def test_anonymizer():
     order2 = Order.objects.create(first_name="Master2", last_name="Chief2")
     order3 = Order.objects.create(first_name="Master3", last_name="Chief3")
     item = Item.objects.create(order=order1, description="Some item", amount=12.50)
-    call_command("anonymize")
+    call_command("anonymize", yes=True)
 
     for order in [order1, order2, order3]:
         new_order = Order.objects.get(id=order.id)
