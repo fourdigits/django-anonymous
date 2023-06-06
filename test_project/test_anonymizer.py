@@ -43,7 +43,7 @@ def test_anonymizer():
         new_order = Order.objects.get(id=order.id)
         assert order.created_on == new_order.created_on
         assert order.first_name != new_order.first_name
-        assert "Anon" == new_order.last_name
+        assert new_order.last_name == f"Anon{new_order.id}"
 
     new_item = Item.objects.get(id=item.id)
     assert item.order_id == new_item.order_id
