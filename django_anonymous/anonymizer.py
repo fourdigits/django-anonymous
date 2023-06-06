@@ -17,11 +17,10 @@ class Anonymizer:
         return total
 
     def _get_fields(self):
-        reserved_names = list(Anonymizer.__dict__.keys()) + ["Meta"]
-
+        reserved_names = list(Anonymizer.__dict__.keys())
         return {
-            name: value
-            for name, value in self.__class__.__dict__.items()
+            name: getattr(self, name)
+            for name in dir(self)
             if not name.startswith("__") and name not in reserved_names
         }
 

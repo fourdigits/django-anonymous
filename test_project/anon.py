@@ -8,7 +8,9 @@ class OrderAnonymizer(Anonymizer):
     UPDATE_BATCH_SIZE = 2
 
     first_name = Faker("first_name", unique=True)
-    last_name = "Anon"
+
+    def last_name(self, obj, seed):
+        return f"Anon{seed}"
 
 
 @register(Item)
